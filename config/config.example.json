@@ -1,0 +1,13 @@
+{
+  "lan": {"interface":"eth0","subnet":"192.168.100.0/24","address":"192.168.100.1/24"},
+  "web": {"host":"127.0.0.1","port":8765},
+  "probe": {"interval_seconds":5,"timeout_seconds":2,"fail_rounds":3,"recover_rounds":5,"targets":["1.1.1.1","8.8.8.8"]},
+  "ip_policy": {"window_seconds":60,"min_samples":12,"failure_threshold":0.6,"bad_windows":3,"cooldown_seconds":300},
+  "wans": [
+    {"name":"WAN1","interface":"eth1","gateway":"198.51.100.1","prefix":24,"addresses":["198.51.100.2","198.51.100.3","198.51.100.4","198.51.100.5"]},
+    {"name":"WAN2","interface":"eth2","gateway":"198.51.101.1","prefix":24,"addresses":["198.51.101.2","198.51.101.3","198.51.101.4","198.51.101.5"]},
+    {"name":"WAN3","interface":"eth3","gateway":"198.51.103.1","prefix":24,"addresses":["198.51.103.2","198.51.103.3","198.51.103.4","198.51.103.5"]},
+    {"name":"WAN4","interface":"eth4","gateway":"198.51.104.1","prefix":24,"addresses":["198.51.104.2","198.51.104.3","198.51.104.4","198.51.104.5"]},
+    {"name":"WAN5","interface":"eth5","gateway":"198.51.105.1","prefix":24,"addresses":["198.51.105.2","198.51.105.3","198.51.105.4","198.51.105.5"]}
+  ]
+}

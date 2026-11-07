@@ -1,0 +1,17 @@
+[Unit]
+Description=MultiWAN source IP TCP probes and advisory pool decisions
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=multiwan
+Group=multiwan
+WorkingDirectory=/opt/multiwan
+Environment=MULTIWAN_STATE_DIR=/var/lib/multiwan
+ExecStart=/usr/bin/python3 -m multiwan.periodic --config /etc/multiwan/config.json --state-dir /var/lib/multiwan
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/multiwan
+PrivateTmp=true

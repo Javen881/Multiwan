@@ -1,0 +1,26 @@
+[Unit]
+Description=MultiWAN privileged guarded WAN control socket
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=multiwan
+UMask=0007
+WorkingDirectory=/opt/multiwan
+Environment=MULTIWAN_CONFIG=/etc/multiwan/config.json
+Environment=MULTIWAN_STATE_DIR=/var/lib/multiwan
+Environment=MULTIWAN_CONTROL_SOCKET=/run/multiwan/control.sock
+ExecStartPre=/usr/bin/mkdir -p /run/multiwan /var/lib/multiwan
+ExecStartPre=/usr/bin/chown root:multiwan /run/multiwan
+ExecStartPre=/usr/bin/chmod 0750 /run/multiwan
+ExecStart=/usr/bin/python3 -m multiwan.control_daemon
+Restart=on-failure
+RestartSec=2
+ProtectHome=true
+PrivateTmp=true
+NoNewPrivileges=false
+
+[Install]
+WantedBy=multi-user.target

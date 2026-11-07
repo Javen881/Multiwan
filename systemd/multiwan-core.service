@@ -1,0 +1,23 @@
+[Unit]
+Description=MultiWAN V3 Core (simulation safe default)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=multiwan
+Group=multiwan
+Environment=MULTIWAN_CONFIG=/etc/multiwan/config.json
+Environment=MULTIWAN_STATE_DIR=/var/lib/multiwan
+ExecStart=/usr/bin/python3 -m multiwan.core
+WorkingDirectory=/opt/multiwan
+StateDirectory=multiwan
+Restart=on-failure
+RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

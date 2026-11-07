@@ -1,0 +1,25 @@
+[Unit]
+Description=MultiWAN V3 local discovery and staged configuration UI
+After=network.target
+
+[Service]
+Type=simple
+User=multiwan
+Group=multiwan
+WorkingDirectory=/opt/multiwan
+Environment=MULTIWAN_CONFIG=/etc/multiwan/config.json
+Environment=MULTIWAN_STATE_DIR=/var/lib/multiwan
+# Supply MULTIWAN_ADMIN_TOKEN via root-managed credential/environment file, not in this unit.
+EnvironmentFile=-/etc/multiwan/web.env
+ExecStart=/usr/bin/python3 -m multiwan.web
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/etc/multiwan
+ProtectHome=true
+PrivateTmp=true
+RestrictAddressFamilies=AF_UNIX AF_INET
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

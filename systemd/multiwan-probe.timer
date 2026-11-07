@@ -1,0 +1,11 @@
+[Unit]
+Description=Sample MultiWAN public IPv4 connectivity at bounded intervals
+
+[Timer]
+OnBootSec=45s
+OnUnitInactiveSec=25s
+AccuracySec=2s
+Unit=multiwan-probe.service
+
+[Install]
+WantedBy=timers.target
